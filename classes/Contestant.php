@@ -13,6 +13,11 @@ class Contestant {
         return strtoupper(readline());
     }
 
+    public function saySolution(): string {
+        //TODO: Actually, to be different to say letter, I should control this is atext, not only a char.
+        return strtoupper(readline());
+    }
+
     public function getName(): string {
         return $this->name;
     }

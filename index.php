@@ -14,7 +14,8 @@ $contester3 = new Contestant("Luisa");
 
 $contest = new Contest($panel1, [$contester1,$contester2,$contester3]);
 
-$contest->play();
+$contester1->saySolution();
+//$contest->play();
 
 
 
