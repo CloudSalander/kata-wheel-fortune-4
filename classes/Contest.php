@@ -40,8 +40,9 @@ class Contest {
                     1 => $this->playLetter($currentContestant,$wheelValue),
                     2 => $this->solvePanel($currentContestant)
                 };
+                if($option == 2 && $turnResolution) return;
+               
             } 
-            return;
             if($passTurn) ++$this->turnNumber;
             $this->showScores();
         }
