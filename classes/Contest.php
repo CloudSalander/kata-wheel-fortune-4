@@ -9,6 +9,9 @@ class Contest {
     const WHEEL_RESULT_MSG = "Result throw result was ";
     const BANKRUPTCY_MSG = "OOOOOOOOOOOOOOOOOOOOOHHHHHH!!!";
     const LOSE_TURN_MSG = "Oh...";
+    const OPTIONS = "What do you want to do?".PHP_EOL."1- Say letter".PHP_EOL."2- Say solution";
+
+
     
     public function __construct(private Panel $panel, private array $contestants) {
         $this->turnNumber = 0;
@@ -31,8 +34,14 @@ class Contest {
 
             if($wheelValue == 'Bankruptcy') $this->makeBankruptcy($currentContestant);
             else if($wheelValue == 'Lose') echo self::LOSE_TURN_MSG.PHP_EOL;
-            else $passTurn = $this->playLetter($currentContestant,$wheelValue);
-
+            else {
+                $option = intval(readline(self::OPTIONS));
+                $turnResolution = match ($option) {
+                    1 => $this->playLetter($currentContestant,$wheelValue),
+                    2 => $this->solvePanel($currentContestant)
+                };
+            } 
+            return;
             if($passTurn) ++$this->turnNumber;
             $this->showScores();
         }
@@ -52,6 +61,11 @@ class Contest {
             return false;
         }     
         return true;
+    }
+
+    private function solvePanel(Contestant $contestant): bool {
+        $possibleSolution = $contestant->saySolution();
+        return $this->panel->solvePanel($possibleSolution);
     }
 
     private function showScores(): void {

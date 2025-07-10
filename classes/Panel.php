@@ -43,6 +43,10 @@ class Panel {
         }
         return 0;
     }
+
+    public function solvePanel(string $possibleSolution): bool {
+        return strcmp($possibleSolution, implode("",$this->textToSolve)) == 0;
+    }
     
     private function checkNewLine(int $charsNumber): void  {
         if($charsNumber >= self::MAX_CHARS_BY_LINE) echo PHP_EOL;
@@ -63,6 +67,8 @@ class Panel {
         }
         return $showedLetters;
     }
+
+
 
 } 
 
