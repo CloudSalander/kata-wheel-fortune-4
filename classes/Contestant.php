@@ -5,6 +5,7 @@ class Contestant {
     public int $points;
 
     const SINGLE_LETTER_PATTERN = "/^[a-zA-Z]$/";
+    const ONLY_LETTERS_PATTERN = "/^[a-zA-Z]+$/";
 
     public function __construct(string $name){
         $this->name = $name;
@@ -12,15 +13,18 @@ class Contestant {
     }
     public function sayLetter(): string { 
         $letter = readline();
-        while(! $this->isValidChar($letter)) {
+        while(!$this->isValidChar($letter)) {
             $letter = readline();
         }
         return strtoupper($letter);
     }
 
     public function saySolution(): string {
-        //TODO: Actually, to be different to say letter, I should control this is atext, not only a char.
-        return strtoupper(readline());
+        $text = readline();
+        while(!$this->isValidText($text)) {
+            $text = readline();
+        }
+        return $text;
     }
 
     public function getName(): string {
@@ -41,6 +45,10 @@ class Contestant {
 
     private function isValidChar(string $char): bool {
         return preg_match(self::SINGLE_LETTER_PATTERN, $char) === 1;
+    }
+
+    private function isValidText(string $text): bool {
+        return preg_match(self::ONLY_LETTERS_PATTERN, $text) === 1;
     }
 }
 
