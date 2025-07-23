@@ -4,13 +4,18 @@ class Contestant {
     private string $name;
     public int $points;
 
+    const SINGLE_LETTER_PATTERN = "/^[a-zA-Z]$/";
+
     public function __construct(string $name){
         $this->name = $name;
         $this->points = 0;
     }
     public function sayLetter(): string { 
-        //TODO: Check right input here. Just one char. Char must be an allowed letter.
-        return strtoupper(readline());
+        $letter = readline();
+        while(! $this->isValidChar($letter)) {
+            $letter = readline();
+        }
+        return strtoupper($letter);
     }
 
     public function saySolution(): string {
@@ -32,6 +37,10 @@ class Contestant {
 
     public function getScore(): int {
         return $this->points;
+    }
+
+    private function isValidChar(string $char): bool {
+        return preg_match(self::SINGLE_LETTER_PATTERN, $char) === 1;
     }
 }
 
