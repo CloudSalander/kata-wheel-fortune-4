@@ -5,7 +5,7 @@ class Contestant {
     public int $points;
 
     const SINGLE_LETTER_PATTERN = "/^[a-zA-Z]$/";
-    const ONLY_LETTERS_PATTERN = "/^[a-zA-Z]+$/";
+    const ONLY_LETTERS_PATTERN = "/^[a-zA-Z\s]+$/";
 
     public function __construct(string $name){
         $this->name = $name;

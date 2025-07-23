@@ -24,7 +24,7 @@ class Contest {
             $passTurn = true;
 
             $this->panel->show();
-
+            
             $this->currentContestantIndex = $this->turnNumber % self::CONTESTANTS_NUMBER;
             $currentContestant = $this->contestants[$this->currentContestantIndex];
 
